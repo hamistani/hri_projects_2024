@@ -19,23 +19,38 @@ def move_joints(pub, names, position, delay = 1):
 
     rospy.sleep(delay)
 
-# def nod_head(pub):
-#     rospy.loginfo("Robot is nodding its head")
-#     move_joints(pub, ["HeadPitch"], [math.radians(-20)], delay = 0.5)
-#     move_joints(pub, ["HeadPitch"], [math.radians(20)], delay = 0.5)
+def nod_head(pub):
+    rospy.loginfo("Robot is nodding its head")
+    move_joints(pub, ["HeadPitch"], [math.radians(-20)], delay = 0.5)
+    move_joints(pub, ["HeadPitch"], [math.radians(20)], delay = 0.5)
+    move_joints(pub, ["HeadPitch"], [math.radians(0)], delay = 0.5)
+
+def wave_hi(pub):
+    rospy.loginfo("Robot is waving hi")
+    for i in range(3):
+        move_joints(pub, ["LShoulderPitch", "LElbowYaw"], [math.radians(45), math.radians(90)], delay = 0.5)
+        move_joints(pub, ["LShoulderPitch", "LElbowYaw"], [math.radians(60), math.radians(90)], delay = 0.5)
+    move_joints(pub, ["LShoulderPitch", "LElbowYaw"], [math.radians(0), math.radians(0)], delay = 0.5)
 
 
 def shake_head(pub):
     rospy.loginfo("Robot shaking its Head")
     move_joints(pub, ["HeadYaw"], [math.radians(-30)], delay = 0.5)
     move_joints(pub, ["HeadYaw"], [math.radians(30)], delay = 0.5)
+    move_joints(pub, ["HeadYaw"], [math.radians(0)], delay = 0.5)
+
+def interpolated_movement(pub, joint, start, end, steps = 10, delay = 0.1):
+    step_size = (end - start) / steps
+    for i in range(steps):
+        position = start + step_size * i
+        move_joints(pub, [joint], [position], delay)
 
 
 
 def talker():
     pub = rospy.Publisher('joint_states', JointState, queue_size=10)
     rospy.init_node('talker', anonymous=True)
-    rate = rospy.Rate(1) # 10hz
+    #rate = rospy.Rate(1) # 10hz
 
     # set initial angle
     #angle = 0
@@ -64,10 +79,15 @@ def talker():
         # angle = angle + 1
         # rate.sleep()
 
-        # nod_head(pub)
+        rospy.sleep(2)
+        nod_head(pub)
+
+        rospy.sleep(1)
+        wave_hi(pub)
+        rospy.sleep(1)
         shake_head(pub)
 
-        rospy.sleep(2)
+        
 
 if __name__ == '__main__':
     try:
