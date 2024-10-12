@@ -1,0 +1,23 @@
+1. What happens when you close one or the other?
+If I close listener before I close talker, the talker still talks, whereas if I close talker first,
+listener doesn't print anything, and waits for talker to talk. 
+
+2. What happens when you close the core node?
+When I close the core mode, there is no longer a connection. In other words, the connection is refused. 
+
+3. What happens when you change the rate for the talker?
+    default is 10 
+    rate = 1
+    rate = 100
+    rate = 100000
+    rate = 0.1
+    rate = 0.001
+
+It speeds up or slows down how fast the talker talks. 
+
+4. What happens when you start two talker nodes?
+The listener picks up both talker nodes. 
+
+5. What happens when you start two listner nodes?
+Both listeners hears the talker. 
+
