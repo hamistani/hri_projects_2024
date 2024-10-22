@@ -1,6 +1,6 @@
 <launch>
     <!-- Joint State Publisher GUI -->
-    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_commander_gui" output="screen" />
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_commander" output="screen" />
 
     <!-- Ensure robot_state_publisher has a unique name -->
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher_1" output="screen" />
