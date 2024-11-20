@@ -1,0 +1,15 @@
+# Hashes of file build rules.
+705946fb495e1990624301680203df2f /home/heatheramistani/Desktop/hri_assignments_2024/hri2024/devel/include/week0/person.h
+a402c73c3df66f1b34118c913abf715c /home/heatheramistani/Desktop/hri_assignments_2024/hri2024/devel/lib/python3/dist-packages/week0/msg/__init__.py
+a0d558c5f79dd07bb24acc5aa23d106a /home/heatheramistani/Desktop/hri_assignments_2024/hri2024/devel/lib/python3/dist-packages/week0/msg/_person.py
+a66ef1474003f556539972ba3bd090f4 /home/heatheramistani/Desktop/hri_assignments_2024/hri2024/devel/share/common-lisp/ros/week0/msg/person.lisp
+bb61e5cd61108fd0b698783aafa4f79a /home/heatheramistani/Desktop/hri_assignments_2024/hri2024/devel/share/gennodejs/ros/week0/msg/person.js
+d0a7d5cffd47914ef5bd5a92023d1096 /home/heatheramistani/Desktop/hri_assignments_2024/hri2024/devel/share/roseus/ros/week0/manifest.l
+ee000979400bdce2e2327e7254d86ded /home/heatheramistani/Desktop/hri_assignments_2024/hri2024/devel/share/roseus/ros/week0/msg/person.l
+f3dce235e3316d0f08ce6b0a1b7870cf CMakeFiles/clean_test_results
+f06b71ea5f61580453d4e8712c2f0bfa hri_projects_2024/week0/CMakeFiles/_week0_generate_messages_check_deps_person
+b64ad97e38400f0942a4d0c4f0bf301a hri_projects_2024/week0/CMakeFiles/week0_generate_messages_cpp
+b64ad97e38400f0942a4d0c4f0bf301a hri_projects_2024/week0/CMakeFiles/week0_generate_messages_eus
+b64ad97e38400f0942a4d0c4f0bf301a hri_projects_2024/week0/CMakeFiles/week0_generate_messages_lisp
+b64ad97e38400f0942a4d0c4f0bf301a hri_projects_2024/week0/CMakeFiles/week0_generate_messages_nodejs
+b64ad97e38400f0942a4d0c4f0bf301a hri_projects_2024/week0/CMakeFiles/week0_generate_messages_py

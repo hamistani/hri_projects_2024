@@ -1,0 +1,8 @@
+prefix=/home/heatheramistani/Desktop/hri_assignments_2024/hri2024/install
+
+Name: week3
+Description: Description of week3
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
