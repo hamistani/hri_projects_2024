@@ -11,7 +11,6 @@ from move import Move
 publisher = None
 subscriber = None
 js_sub = None
-
 js_msg = None
 
 def callback_function(msg):
@@ -23,7 +22,7 @@ def main():
     # global publisher, subscriber, js_sub
 
     # initialize the node
-    rospy.init_node('tf2_loo_at_hand2')
+    rospy.init_node('tf2_look_at_hand2')
 
     # Create a buffer for storing transformations
     tfBuffer = tf2_ros.Buffer()
@@ -38,8 +37,8 @@ def main():
     # make a publisher to /joint_states
     publisher = rospy.Publisher('/updated_joint_states', JointState, queue_size = 10)
 
-    function_callback = FunctionCallback()
-    mover = Move()
+    # function_callback = FunctionCallback()
+    # mover = Move()
 
     rate = rospy.Rate(10.0)
 
@@ -50,7 +49,7 @@ def main():
 
             # Calculates the yaw and pitch angles based on the transform
             yaw_angle = math.atan2(trans.transform.translation.y, trans.transform.translation.x)
-            pitch_angle = math.atan2(trans.transform.translation.y, trans.transform.translation.x)
+            pitch_angle = math.atan2(trans.transform.translation.z, trans.transform.translation.x)
 
             # Creates a new JointState message to update the head's joints
             updated_joint_states = JointState()

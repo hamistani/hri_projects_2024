@@ -31,8 +31,11 @@ class Move:
 
         # change headpitch and headyaw
         if "HeadYaw" in updated_joint_states.name and "HeadPitch" in updated_joint_states.name:
-            yaw_index = updated_joint_states.name.index("HeadYaw")
-            pitch_index = updated_joint_states.name.index("HeadPitch")
+            # yaw_index = updated_joint_states.name.index("HeadYaw")
+            # pitch_index = updated_joint_states.name.index("HeadPitch")
+            smoothed_yaw = previous_yaw_angle + smoothing_factor * (yaw - previous_yaw_angle)
+            smoothed_pitch = previous_pitch_angle + smoothing_factor * (pitch - previous_pitch_angle)
+
 
             updated_joint_states.position[yaw_index] = yaw
             updated_joint_states.position[pitch_index] = pitch
