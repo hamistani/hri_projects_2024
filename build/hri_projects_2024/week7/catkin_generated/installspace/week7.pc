@@ -1,8 +1,0 @@
-prefix=/home/heatheramistani/Desktop/hri_assignments_2024/hri2024/install
-
-Name: week7
-Description: Description of week7
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
