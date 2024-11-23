@@ -1,53 +1,76 @@
 #!/usr/bin/python3
 import rospy
-import math
-import tf2_ros
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 
-
 publisher = None
-subscriber = None
-js_sub = None
-
 js_msg = None
+previous_yaw_angle = 0.0
+previous_pitch_angle = 0.0
+smoothing_factor = 0.5
 
 class Move:
-
+    @staticmethod
     def move(yaw, pitch):
-        global publisher, js_msg
+        global publisher, js_msg, previous_yaw_angle, previous_pitch_angle
 
-        # make a new joint state msg
-        updated_joint_states = JointState()
-
-        # copy over the saved one
-        if js_msg is not None:
-            updated_joint_states.header = js_msg.header
-            updated_joint_states.name = js_msg.name
-            updated_joint_states.position = js_msg.position[:]
-        else:
+        # Ensure a joint state message is available
+        if js_msg is None:
             rospy.logwarn("No joint state message available to copy from")
-            return 
+            return
 
-        # change headpitch and headyaw
-        if "HeadYaw" in updated_joint_states.name and "HeadPitch" in updated_joint_states.name:
-            # yaw_index = updated_joint_states.name.index("HeadYaw")
-            # pitch_index = updated_joint_states.name.index("HeadPitch")
-            smoothed_yaw = previous_yaw_angle + smoothing_factor * (yaw - previous_yaw_angle)
-            smoothed_pitch = previous_pitch_angle + smoothing_factor * (pitch - previous_pitch_angle)
+        # Create a new joint state message
+        updated_joint_states = JointState()
+        updated_joint_states.header = Header()
+        updated_joint_states.header.stamp = rospy.Time.now()
+        updated_joint_states.name = js_msg.name[:]
+        updated_joint_states.position = js_msg.position[:]
 
+        # Find indices for HeadYaw and HeadPitch
+        try:
+            yaw_index = updated_joint_states.name.index("HeadYaw")
+            pitch_index = updated_joint_states.name.index("HeadPitch")
+        except ValueError:
+            rospy.logwarn("HeadYaw or HeadPitch not found in joint states")
+            return
 
-            updated_joint_states.position[yaw_index] = yaw
-            updated_joint_states.position[pitch_index] = pitch
+        # Apply smoothing to yaw and pitch
+        smoothed_yaw = previous_yaw_angle + smoothing_factor * (yaw - previous_yaw_angle)
+        smoothed_pitch = previous_pitch_angle + smoothing_factor * (pitch - previous_pitch_angle)
 
-            rospy.loginfo(f"Updated head joints: yaw={yaw}, pitch={pitch}")
-        
-        else:
-            rospy.logwarn("HeadYaw or HeadPitch not found in the joint states")
-            return 
+        # Update positions
+        updated_joint_states.position[yaw_index] = smoothed_yaw
+        updated_joint_states.position[pitch_index] = smoothed_pitch
 
-        # publish
+        # Publish the updated joint states
         publisher.publish(updated_joint_states)
-        rospy.loginfo("Published updated joint states.")
+        rospy.loginfo(f"Published updated joint states: yaw={smoothed_yaw}, pitch={smoothed_pitch}")
 
+        # Update previous angles
+        previous_yaw_angle = smoothed_yaw
+        previous_pitch_angle = smoothed_pitch
+
+
+def joint_state_callback(msg):
+    global js_msg
+    rospy.loginfo("Received joint state message")
+    js_msg = msg
+
+
+def main():
+    global publisher
+
+    rospy.init_node('move_node')
+
+    # Initialize publisher and subscriber
+    publisher = rospy.Publisher('joint_states', JointState, queue_size=10)
+    rospy.Subscriber('joint_states_input', JointState, joint_state_callback)
+
+    rospy.spin()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
         pass
