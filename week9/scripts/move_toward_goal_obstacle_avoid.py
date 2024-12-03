@@ -77,7 +77,7 @@ class MoveTowardPersonWithObstacle:
             goal_y = self.person_pos.y
 
             #Calculates the angle to the goal (person) relative to the robot's pos
-            angle_to_goal = math.atan2(goal_y - self.odom.pose.pose.pos.y, goal_x - self.odom.pose.pose.pos.x)
+            angle_to_goal = math.atan2(goal_y - self.odom.pose.pose.position.y, goal_x - self.odom.pose.pose.position.x)
 
             #Gets the current yaw (orientation) of the robot
             current_yaw = self.get_yaw()
