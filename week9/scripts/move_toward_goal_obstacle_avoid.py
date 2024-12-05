@@ -9,7 +9,7 @@ import tf2_ros
 import geometry_msgs.msg
 
 SAFE_DISTANCE = 0.5  # Safe distance to obstacles
-PERSON_DETECTION_THRESHOLD = 1.0  # Distance threshold for detecting person
+# PERSON_DETECTION_THRESHOLD = 1.0  # Distance threshold for detecting person
 
 class MoveTowardPersonWithObstacle:
     def __init__(self):
@@ -38,6 +38,7 @@ class MoveTowardPersonWithObstacle:
         orientation_q = self.odom.pose.pose.orientation
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion(orientation_list)
+        _, _, yaw = euler_from_quaternion(orientation_list)
         return yaw
 
     def scan_callback(self, data):
@@ -45,7 +46,7 @@ class MoveTowardPersonWithObstacle:
         front_ranges = data.ranges[len(data.ranges) // 2 - 10 : len(data.ranges) // 2 + 10]
         closest_front_distance = min(front_ranges)
 
-        rospy.loginfo(f"Closest distance to obstacle in front: {closest_front_distance:.2f} meters")
+        # rospy.loginfo(f"Closest distance to obstacle in front: {closest_front_distance:.2f} meters")
 
         #Determines if an obstacle is within a safe distance
         if closest_front_distance < SAFE_DISTANCE:
@@ -54,10 +55,16 @@ class MoveTowardPersonWithObstacle:
                 self.should_move = False
                 self.turning = True
                 self.start_yaw = self.get_yaw()
+        elif self.person_pos and self.person_pos.x < SAFE_DISTANCE:
+            rospy.loginfo("Detected leg is too close. Stopping.")
+            self.should_move = False
+            self.turning = False
         else:
-            #Resumes moving if the path is clear and no turn is in progress
-            if not self.turning:
-                self.should_move = True
+            self.should_move = True
+            
+            # #Resumes moving if the path is clear and no turn is in progress
+            # if not self.turning:
+            #     self.should_move = True
 
     def get_person_pos(self):
         try:
@@ -94,18 +101,18 @@ class MoveTowardPersonWithObstacle:
             if abs(angle_diff) > 0.1: 
                 move_cmd.linear.x = 0.0 
                 move_cmd.angular.z = 0.5 * angle_diff / abs(angle_diff)  # Turn towards the goal
-                rospy.loginfo(f"Turning towards goal. Angular speed: {move_cmd.angular.z:.2f}")
+                #rospy.loginfo(f"Turning towards goal. Angular speed: {move_cmd.angular.z:.2f}")
             else:
                 #If the robot is facing the goal, move forward
                 move_cmd.linear.x = 0.2
                 move_cmd.angular.z = 0.0
-                rospy.loginfo("Moving toward goal.")
+                #rospy.loginfo("Moving toward goal.")
 
         elif self.turning:
             #Starts turning if an obstacle is detected
             move_cmd.linear.x = 0.0
             move_cmd.angular.z = 0.5  # Turn at 0.5 rad/s
-            rospy.loginfo("Turning.")
+            #rospy.loginfo("Turning.")
 
             #Checks if turned 1 radian from the start yaw
             current_yaw = self.get_yaw()
@@ -115,7 +122,7 @@ class MoveTowardPersonWithObstacle:
                 move_cmd.angular.z = 0.0
                 self.turning = False
                 self.should_move = True
-                rospy.loginfo("Completed turn. Resuming forward motion.")
+                #rospy.loginfo("Completed turn. Resuming forward motion.")
 
         self.pub.publish(move_cmd)
 
