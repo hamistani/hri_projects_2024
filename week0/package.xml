@@ -4,7 +4,6 @@
   <version>0.0.0</version>
   <description>The week0 package</description>
 
-<<<<<<< HEAD
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
@@ -49,7 +48,7 @@
   <!--   <test_depend>gtest</test_depend> -->
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
-=======
+  
   <maintainer email="dave@cse.unr.edu">David Feil-Seifer</maintainer>
   <license>GPLv3</license>
 
@@ -59,7 +58,6 @@
 
   <author email="dave@cse.unr.edu">David Feil-Seifer</author> -->
 
->>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
@@ -77,8 +75,4 @@
     <!-- Other tools can request additional information be placed here -->
 
   </export>
-<<<<<<< HEAD
 </package>
-=======
-</package>
->>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
