@@ -36,10 +36,6 @@ if __name__ == '__main__':
     n = TurnOdom()
     rate = rospy.Rate(15.0)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
     # figure out where we started from
     start = n.get_yaw(n.get_odom())
 

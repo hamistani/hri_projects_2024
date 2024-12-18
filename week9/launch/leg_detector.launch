@@ -2,11 +2,7 @@
   <node pkg="leg_detector" type="leg_detector" name="leg_detector"
         args="scan:=base_scan $(find leg_detector)/config/trained_leg_detector.yaml" output="screen">
 
-<<<<<<< HEAD
         <param name="fixed_frame" type="str" value="robot_0/base_link"/>
-=======
-        <param name="fixed_frame" type="str" value="odom"/>
->>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
         <param name="leg_pair_separation" type="double" value="1.5"/>
         <param name="leg_reliability_limit" type="double" value="0"/>
 

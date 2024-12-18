@@ -2,7 +2,6 @@
 # license removed for brevity
 import rospy
 import math
-<<<<<<< HEAD
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 # import time
@@ -59,30 +58,18 @@ def interpolated_movement(pub, joint, start, end, steps = 10, delay = 0.1):
         move_joints(pub, [joint], [position], delay)
 
 
-=======
-
-from sensor_msgs.msg import JointState
->>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 
 def talker():
     pub = rospy.Publisher('joint_states', JointState, queue_size=10)
     rospy.init_node('talker', anonymous=True)
-<<<<<<< HEAD
     #rate = rospy.Rate(1) # 10hz
 
     # set initial angle
     #angle = 0
-=======
-    rate = rospy.Rate(1) # 10hz
-
-    # set initial angle
-    angle = 0
->>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 
 
     while not rospy.is_shutdown():
         #hello_str = "hello world %s" % rospy.get_time()
-<<<<<<< HEAD
         # js = JointState()
         
         # # header info
@@ -113,28 +100,6 @@ def talker():
         shake_head(pub)
 
         
-=======
-        js = JointState()
-        
-        # header info
-        js.header.stamp = rospy.get_rostime()
-        js.header.frame_id="Torso"
-
-
-        # put in some joints that we'll edit
-        js.name.append("HeadYaw")
-        js.name.append("HeadPitch")
-
-        js.position.append(math.radians(angle))
-        js.position.append(0)
-
-        #comment this out once it gets noisy
-        rospy.loginfo(js)
-        
-        pub.publish(js)
-        angle = angle + 1
-        rate.sleep()
->>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 
 if __name__ == '__main__':
     try:
