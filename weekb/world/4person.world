@@ -21,6 +21,15 @@ window
 )
 
 # load an environment bitmap
+<<<<<<< HEAD
+#floorplan
+#( 
+ # name "room"
+  #bitmap "basic_map.pgm"
+  #size [35.000 35.000 0.500]
+   #pose [ 0.000 0.000 0.000 90.000 ]
+#)
+=======
 floorplan
 ( 
   name "room"
@@ -28,6 +37,7 @@ floorplan
   size [35.000 35.000 0.500]
    pose [ 0.000 0.000 0.000 90.000 ]
 )
+>>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 
 
 define topurg ranger

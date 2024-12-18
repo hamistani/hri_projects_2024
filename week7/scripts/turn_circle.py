@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 #!/usr/bin/python3
 
 import rospy

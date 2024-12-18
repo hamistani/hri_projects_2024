@@ -1,11 +1,27 @@
 <launch>
 
 	<arg name="version" default="V40" />
+<<<<<<< HEAD
+	<include file="$(find nao_description)/launch/robot_state_publisher.launch">
+=======
   	<include file="$(find nao_description)/launch/upload_nao.launch" >
+>>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 		<arg name="version" value="$(arg version)" />
 	</include>
 
 	<!-- complete robot model with base_footprint -->
+<<<<<<< HEAD
+	<!-- <node pkg="nao_description" type="base_footprint" name="base_footprint" /> -->
+
+	<!-- add the joint mover -->
+
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_commander">
+		<rosparam param="source_list">['joint_states_out']</rosparam>
+	</node>
+	
+	<arg name="config_file" value="$(find nao_description)/config/urdf.rviz"/>
+	<node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false" output="screen" args="-d $(arg config_file)" />
+=======
 	<node pkg="nao_description" type="base_footprint" name="base_footprint" />
 
 	<!-- additionally load the robot state publisher -->
@@ -13,5 +29,6 @@
 
 	<!-- add the joint mover -->
 	<!--<node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="nao_mover"/>-->
+>>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 
 </launch>

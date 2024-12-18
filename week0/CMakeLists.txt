@@ -4,13 +4,21 @@ project(week0)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
+<<<<<<< HEAD
+## Find catkin macros and lihraries
+=======
 ## Find catkin macros and libraries
+>>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+<<<<<<< HEAD
+  message_generation
+=======
+>>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 )
 
 ## System dependencies are found with CMake's conventions
@@ -67,11 +75,24 @@ find_package(catkin REQUIRED COMPONENTS
 #   Action2.action
 # )
 
+<<<<<<< HEAD
+add_message_files(
+  FILES
+  person.msg
+)
+
+## Generate added messages and services with any dependencies listed here
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+=======
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
 #   std_msgs
 # )
+>>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -106,6 +127,10 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES week0
 #  CATKIN_DEPENDS roscpp rospy std_msgs
+<<<<<<< HEAD
+  CATKIN_DEPENDS message_runtime
+=======
+>>>>>>> 26417db9265fb5d94e17c65b732632959323cf3a
 #  DEPENDS system_lib
 )
 
