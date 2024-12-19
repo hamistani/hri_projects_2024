@@ -1,0 +1,11 @@
+<launch>
+
+    <!-- complete robot model with base_footprint -->
+
+    <!-- additionally load the robot state publisher -->
+    <node pkg="weeke" type="move-hear.py" name="move_robot" output="screen"/>
+
+    <!-- add the joint mover -->
+<!--     <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="nao_mover"/> -->
+
+</launch>

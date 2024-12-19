@@ -84,6 +84,7 @@ class MoveToGroup:
                     continue
 
                 # Command movement
+                
                 cmd = Twist()
                 if abs(angle_diff) > 0.1:  # Turn toward the target
                     cmd.angular.z = max(-0.5, min(0.5, angle_diff))  # Cap angular speed
